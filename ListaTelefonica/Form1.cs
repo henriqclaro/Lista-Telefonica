@@ -61,6 +61,11 @@ namespace ListaTelefonica
         {
             DataGridViewCell cell = dgvLista.SelectedCells[0];
             int indice = cell.RowIndex;
+            DialogResult r = MessageBox.Show("Deseja remover " + lista[indice, 0] + "?", "Remover", MessageBoxButtons.YesNo);
+            if (r == DialogResult.No)
+            {
+                return;
+            }
             lista[indice, 0] = null;
             lista[indice, 1] = null;
             for (int i = 0; i <= itens; i++)
