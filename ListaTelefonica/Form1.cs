@@ -13,28 +13,53 @@ using System.Xml.Linq;
 
 namespace ListaTelefonica
 {
-    
+
     public partial class Form1 : Form
     {
-        string[,] lista;
+        string[][] lista;
         readonly int MAX = 100;
-        int itens = 0;
         public Form1()
         {
             InitializeComponent();
-            lista = new string[MAX, 2];
+            lista = new string[MAX][];
+        }
+
+        int Length(string[][] e)
+        {
+            int itens = 0;
+            for (int i = 0; i < e.Length; i++)
+            {
+                if (e[i] != null)
+                {
+                    itens++;
+                }
+            }
+            return itens;
+        }
+
+        int Length(string[] e)
+        {
+            int itens = 0;
+            for (int i = 0; i < e.Length; i++)
+            {
+                if (e[i] != null)
+                {
+                    itens++;
+                }
+            }
+            return itens;
         }
 
         void Atualizar()
         {
             dgvLista.Rows.Clear();
-            for (int i = 0; i < itens; i++)
+            for (int i = 0; i < Length(lista); i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dgvLista);
-                for (int j = 0; j < 2; j++)
+                for (int j = 0; j < Length(lista[i]); j++)
                 {
-                    row.Cells[j].Value = lista[i, j];
+                    row.Cells[j].Value = lista[i][j];
                 }
                 dgvLista.Rows.Add(row);
             }
@@ -47,39 +72,52 @@ namespace ListaTelefonica
                 MessageBox.Show("Insira nome e telefone.");
                 return;
             }
-            
-            lista[itens, 0] = txtNome.Text;
-            lista[itens, 1] = txtTel.Text;
-            itens++;
+
+            if (Length(lista) == MAX)
+            {
+                MessageBox.Show("Lista cheia.");
+                return;
+            }
+
+            int id = 1;
+            if (Length(lista) > 0)
+            {
+                id = int.Parse(lista[Length(lista) - 1][0]) + 1;
+            }
+
+            lista[Length(lista)] = new string[] { id.ToString(), txtNome.Text, txtTel.Text };
 
             Atualizar();
             txtNome.Clear();
             txtTel.Clear();
         }
-
+        
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            DataGridViewCell cell = dgvLista.SelectedCells[0];
-            int indice = cell.RowIndex;
-            DialogResult r = MessageBox.Show("Deseja remover " + lista[indice, 0] + "?", "Remover", MessageBoxButtons.YesNo);
-            if (r == DialogResult.No)
+            if (dgvLista.SelectedCells.Count == 0)
             {
+                MessageBox.Show("Seleciona uma célula.");
                 return;
             }
-            lista[indice, 0] = null;
-            lista[indice, 1] = null;
-            for (int i = 0; i <= itens; i++)
+
+            DataGridViewCell cell = dgvLista.SelectedCells[0];
+            int linha = cell.RowIndex;
+            string id = dgvLista.Rows[linha].Cells[0].Value.ToString();
+
+            int indice = 0;
+            for (indice = 0; indice < Length(lista) && lista[indice][0] != id; indice++) ;
+
+            DialogResult r = MessageBox.Show($"Deseja remover {lista[indice][1]}?", "Remover", MessageBoxButtons.YesNo);
+            if (r == DialogResult.Yes)
             {
-                if (lista[i, 0] == null)
+                for (int i = indice; i <= Length(lista) - 1; i++)
                 {
-                    lista[i, 0] = lista[i + 1, 0];
-                    lista[i, 1] = lista[i + 1, 1];
-                    lista[i + 1, 0] = null;
-                    lista[i + 1, 1] = null;
+                    lista[i] = lista[i + 1];
                 }
+                lista[Length(lista)] = null;
+
+                Atualizar();
             }
-            itens--;
-            Atualizar();
         }
     }
 }
