@@ -70,7 +70,7 @@
             this.txtNome.Location = new System.Drawing.Point(383, 74);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(114, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtNome.TabIndex = 0;
             // 
             // txtTel
             // 
@@ -80,14 +80,15 @@
             this.txtTel.Mask = "(00) 0 0000-0000";
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(114, 20);
-            this.txtTel.TabIndex = 3;
+            this.txtTel.TabIndex = 1;
             // 
             // btnAdicionar
             // 
+            this.btnAdicionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdicionar.Location = new System.Drawing.Point(316, 166);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(181, 39);
-            this.btnAdicionar.TabIndex = 4;
+            this.btnAdicionar.TabIndex = 3;
             this.btnAdicionar.Text = "&Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
@@ -107,6 +108,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.Size = new System.Drawing.Size(269, 276);
             this.dgvLista.TabIndex = 5;
+            this.dgvLista.TabStop = false;
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // ID
@@ -131,10 +133,11 @@
             // 
             // btnRemover
             // 
+            this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemover.Location = new System.Drawing.Point(316, 211);
             this.btnRemover.Name = "btnRemover";
             this.btnRemover.Size = new System.Drawing.Size(181, 39);
-            this.btnRemover.TabIndex = 6;
+            this.btnRemover.TabIndex = 4;
             this.btnRemover.Text = "&Remover";
             this.btnRemover.UseVisualStyleBackColor = true;
             this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
