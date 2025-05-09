@@ -18,6 +18,7 @@ namespace ListaTelefonica
     {
         string[][] lista;
         readonly int MAX = 100;
+        string selectedId;
         public Form1()
         {
             InitializeComponent();
@@ -69,7 +70,7 @@ namespace ListaTelefonica
         {
             if (String.IsNullOrWhiteSpace(txtNome.Text) || !txtTel.MaskFull)
             {
-                MessageBox.Show("Insira nome e telefone.");
+                MessageBox.Show("Insira nome e telefone completos.");
                 return;
             }
 
@@ -78,18 +79,31 @@ namespace ListaTelefonica
                 MessageBox.Show("Lista cheia.");
                 return;
             }
-
-            int id = 1;
-            if (Length(lista) > 0)
+            
+            if (!String.IsNullOrEmpty(selectedId))
             {
-                id = int.Parse(lista[Length(lista) - 1][0]) + 1;
+                int indice = 0;
+                for (indice = 0; indice < Length(lista) && lista[indice][0] != selectedId; indice++);
+                lista[indice][1] = txtNome.Text;
+                lista[indice][2] = txtTel.Text;
             }
 
-            lista[Length(lista)] = new string[] { id.ToString(), txtNome.Text, txtTel.Text };
+            else
+            {
+                int id = 1;
+                if (Length(lista) > 0)
+                {
+                    id = int.Parse(lista[Length(lista) - 1][0]) + 1;
+                }
+
+                lista[Length(lista)] = new string[] { id.ToString(), txtNome.Text, txtTel.Text };
+            }
 
             Atualizar();
             txtNome.Clear();
             txtTel.Clear();
+            selectedId = null;
+            btnAdicionar.Text = "&Adicionar";
         }
         
         private void btnRemover_Click(object sender, EventArgs e)
@@ -102,10 +116,10 @@ namespace ListaTelefonica
 
             DataGridViewCell cell = dgvLista.SelectedCells[0];
             int linha = cell.RowIndex;
-            string id = dgvLista.Rows[linha].Cells[0].Value.ToString();
+            selectedId = dgvLista.Rows[linha].Cells[0].Value.ToString();
 
             int indice = 0;
-            for (indice = 0; indice < Length(lista) && lista[indice][0] != id; indice++) ;
+            for (indice = 0; indice < Length(lista) && lista[indice][0] != selectedId; indice++);
 
             DialogResult r = MessageBox.Show($"Deseja remover {lista[indice][1]}?", "Remover", MessageBoxButtons.YesNo);
             if (r == DialogResult.Yes)
@@ -118,6 +132,25 @@ namespace ListaTelefonica
 
                 Atualizar();
             }
+        }
+
+        private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (selectedId == dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString())
+            {
+                selectedId = null;
+                txtNome.Clear();
+                txtTel.Clear();
+                return;
+            }
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+            btnAdicionar.Text = "&Atualizar";
+            selectedId = dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtNome.Text = dgvLista.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtTel.Text = dgvLista.Rows[e.RowIndex].Cells[2].Value.ToString();
         }
     }
 }

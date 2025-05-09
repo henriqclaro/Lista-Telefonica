@@ -34,10 +34,10 @@
             this.txtTel = new System.Windows.Forms.MaskedTextBox();
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.dgvLista = new System.Windows.Forms.DataGridView();
-            this.btnRemover = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnRemover = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,9 +86,9 @@
             // 
             this.btnAdicionar.Location = new System.Drawing.Point(316, 166);
             this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(181, 29);
+            this.btnAdicionar.Size = new System.Drawing.Size(181, 39);
             this.btnAdicionar.TabIndex = 4;
-            this.btnAdicionar.Text = "Adicionar";
+            this.btnAdicionar.Text = "&Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
@@ -107,16 +107,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.Size = new System.Drawing.Size(269, 276);
             this.dgvLista.TabIndex = 5;
-            // 
-            // btnRemover
-            // 
-            this.btnRemover.Location = new System.Drawing.Point(316, 201);
-            this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(181, 29);
-            this.btnRemover.TabIndex = 6;
-            this.btnRemover.Text = "Remover";
-            this.btnRemover.UseVisualStyleBackColor = true;
-            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
+            this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // ID
             // 
@@ -137,6 +128,16 @@
             this.Telefone.HeaderText = "Telefone";
             this.Telefone.Name = "Telefone";
             this.Telefone.ReadOnly = true;
+            // 
+            // btnRemover
+            // 
+            this.btnRemover.Location = new System.Drawing.Point(316, 211);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(181, 39);
+            this.btnRemover.TabIndex = 6;
+            this.btnRemover.Text = "&Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // Form1
             // 
