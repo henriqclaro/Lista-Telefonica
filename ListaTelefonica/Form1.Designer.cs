@@ -110,6 +110,7 @@
             this.dgvLista.TabIndex = 5;
             this.dgvLista.TabStop = false;
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
+            this.dgvLista.Click += new System.EventHandler(this.dgvLista_Click);
             // 
             // ID
             // 

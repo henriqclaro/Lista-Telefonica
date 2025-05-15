@@ -136,6 +136,10 @@ namespace ListaTelefonica
 
         private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
             if (selectedId == dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString())
             {
                 selectedId = null;
@@ -143,14 +147,18 @@ namespace ListaTelefonica
                 txtTel.Clear();
                 return;
             }
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
             btnAdicionar.Text = "&Atualizar";
             selectedId = dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString();
             txtNome.Text = dgvLista.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtTel.Text = dgvLista.Rows[e.RowIndex].Cells[2].Value.ToString();
+        }
+
+        private void dgvLista_Click(object sender, EventArgs e)
+        {
+            selectedId = null;
+            txtNome.Clear();
+            txtTel.Clear();
+            btnAdicionar.Text = "&Adicionar";
         }
     }
 }
