@@ -100,10 +100,7 @@ namespace ListaTelefonica
             }
 
             Atualizar();
-            txtNome.Clear();
-            txtTel.Clear();
-            selectedId = null;
-            btnAdicionar.Text = "&Adicionar";
+            Limpar();
         }
         
         private void btnRemover_Click(object sender, EventArgs e)
@@ -130,8 +127,17 @@ namespace ListaTelefonica
                 }
                 lista[Length(lista)] = null;
 
+                Limpar();
                 Atualizar();
             }
+        }
+
+        void Limpar()
+        {
+            selectedId = null;
+            txtNome.Clear();
+            txtTel.Clear();
+            btnAdicionar.Text = "&Adicionar";
         }
 
         private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -142,9 +148,7 @@ namespace ListaTelefonica
             }
             if (selectedId == dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString())
             {
-                selectedId = null;
-                txtNome.Clear();
-                txtTel.Clear();
+                Limpar();
                 return;
             }
             btnAdicionar.Text = "&Atualizar";
@@ -155,10 +159,7 @@ namespace ListaTelefonica
 
         private void dgvLista_Click(object sender, EventArgs e)
         {
-            selectedId = null;
-            txtNome.Clear();
-            txtTel.Clear();
-            btnAdicionar.Text = "&Adicionar";
+            Limpar();
         }
     }
 }
