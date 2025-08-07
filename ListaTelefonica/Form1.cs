@@ -18,11 +18,13 @@ namespace ListaTelefonica
     public partial class Form1 : Form
     {
         List<Contato> lista;
+        Contato edicao;
         string selectedId;
         public Form1()
         {
             InitializeComponent();
             lista = new List<Contato>();
+            edicao = null;
         }
 
         void Atualizar()
@@ -30,12 +32,7 @@ namespace ListaTelefonica
             dgvLista.Rows.Clear();
             for (int i = 0; i < lista.Count; i++)
             {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dgvLista);
-                row.Cells[0].Value = lista[i].Id;
-                row.Cells[1].Value = lista[i].Nome;
-                row.Cells[2].Value = lista[i].Telefone;
-                dgvLista.Rows.Add(row);
+                dgvLista.Rows.Add(lista[i].Id, lista[i].Nome, lista[i].Telefone);
             }
         }
 
@@ -47,6 +44,16 @@ namespace ListaTelefonica
                 return;
             }
 
+            if (edicao != null)
+            {
+                edicao.Nome = txtNome.Text;
+                edicao.Telefone = txtTel.Text;
+                edicao = null;
+                btnAdicionar.Text = "&Adicionar";
+                btnRemover.Enabled = false;
+            }
+            
+            /*
             if (!String.IsNullOrEmpty(selectedId))
             {
                 int indice = 0;
@@ -54,6 +61,7 @@ namespace ListaTelefonica
                 lista[indice].Nome = txtNome.Text;
                 lista[indice].Telefone = txtTel.Text;
             }
+            */
 
             else
             {
@@ -77,22 +85,18 @@ namespace ListaTelefonica
         
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            if (dgvLista.SelectedCells.Count == 0)
+            if (edicao == null)
             {
                 MessageBox.Show("Seleciona uma célula.");
                 return;
             }
 
-            DataGridViewCell cell = dgvLista.SelectedCells[0];
-            int linha = cell.RowIndex;
-            selectedId = dgvLista.Rows[linha].Cells[0].Value.ToString();
+            
 
-            int indice = lista.FindIndex(c => c.Id+"" == selectedId);
-
-            DialogResult r = MessageBox.Show($"Deseja remover {lista[indice].Nome}?", "Remover", MessageBoxButtons.YesNo);
+            DialogResult r = MessageBox.Show($"Deseja remover {edicao.Nome}?", "Remover", MessageBoxButtons.YesNo);
             if (r == DialogResult.Yes)
             {
-                lista.RemoveAt(indice);
+                lista.Remove(edicao);
 
                 Limpar();
                 Atualizar();
@@ -109,6 +113,20 @@ namespace ListaTelefonica
 
         private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewCell celula = dgvLista.SelectedCells[0];
+            int linha = celula.RowIndex;
+            int id = (int)dgvLista.Rows[linha].Cells[0].Value;
+
+            edicao = lista.Find(c => c.Id == id);
+
+            txtNome.Text = edicao.Nome;
+            txtTel.Text = edicao.Telefone;
+
+
+            btnAdicionar.Text = "&Atualizar";
+            btnRemover.Enabled = true;
+
+            /*
             if (e.RowIndex < 0)
             {
                 return;
@@ -116,12 +134,13 @@ namespace ListaTelefonica
             if (selectedId == dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString())
             {
                 Limpar();
-                return;
+                return; 
             }
             btnAdicionar.Text = "&Atualizar";
             selectedId = dgvLista.Rows[e.RowIndex].Cells[0].Value.ToString();
             txtNome.Text = dgvLista.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtTel.Text = dgvLista.Rows[e.RowIndex].Cells[2].Value.ToString();
+            */
         }
 
         private void dgvLista_Click(object sender, EventArgs e)

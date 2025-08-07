@@ -134,6 +134,7 @@
             // 
             // btnRemover
             // 
+            this.btnRemover.Enabled = false;
             this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemover.Location = new System.Drawing.Point(316, 211);
             this.btnRemover.Name = "btnRemover";
