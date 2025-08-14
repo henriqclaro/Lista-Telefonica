@@ -83,6 +83,7 @@
             this.btnAdicionar.TabIndex = 3;
             this.btnAdicionar.Text = "&Adicionar Contato";
             this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
             // btnEditar
             // 

@@ -19,7 +19,7 @@ namespace ListaTelefonica
     {
         List<Contato> lista;
         Contato edicao;
-        string selectedId;
+
         public Form1()
         {
             InitializeComponent();
@@ -105,7 +105,7 @@ namespace ListaTelefonica
 
         void Limpar()
         {
-            selectedId = null;
+
             txtNome.Clear();
             txtTel.Clear();
             btnAdicionar.Text = "&Adicionar";
