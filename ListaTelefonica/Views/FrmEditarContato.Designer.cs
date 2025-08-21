@@ -60,6 +60,7 @@
             // txtNome
             // 
             this.txtNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(52)))), ((int)(((byte)(53)))));
+            this.txtNome.ForeColor = System.Drawing.Color.White;
             this.txtNome.Location = new System.Drawing.Point(85, 9);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(183, 20);
@@ -68,6 +69,7 @@
             // txtTel
             // 
             this.txtTel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(52)))), ((int)(((byte)(53)))));
+            this.txtTel.ForeColor = System.Drawing.Color.White;
             this.txtTel.Location = new System.Drawing.Point(85, 44);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(183, 20);
@@ -83,6 +85,7 @@
             this.btnSalvar.TabIndex = 4;
             this.btnSalvar.Text = "&Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // FrmEditarContato
             // 

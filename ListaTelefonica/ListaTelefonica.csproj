@@ -192,6 +192,16 @@
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Contexto.datasource" />
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Models.Contato.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Presenters.ContatoPresenter.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Views.FrmEditarContato.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Views.FrmNovoContato.datasource" />
+    <None Include="Properties\DataSources\ListaTelefonica.Views.FrmPrincipal.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
